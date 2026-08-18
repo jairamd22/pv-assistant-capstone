@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: pv_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-pv_assistant}
+      POSTGRES_USER: ${POSTGRES_USER:-user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: pv_app
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=${POSTGRES_DB:-pv_assistant}
+      - POSTGRES_USER=${POSTGRES_USER:-user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-mini}
+      - AEMS_MODE=${AEMS_MODE:-fixture}
+      - SEARCH_BACKEND=${SEARCH_BACKEND:-memory}
+      - OPENFDA_API_KEY=${OPENFDA_API_KEY:-}
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    depends_on:
+      - postgres
+
+  # scheduled corpus ingestion (labels + regulations -> pgvector).
+  # AEMS is deliberately NOT here: it's a live tool call from `app`.
+  ingestion:
+    build: .
+    container_name: pv_ingestion
+    command: >
+      sh -c "while true; do
+               uv run python ingestion/pipeline.py;
+               echo 'next ingestion in 24h'; sleep 86400;
+             done"
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=${POSTGRES_DB:-pv_assistant}
+      - POSTGRES_USER=${POSTGRES_USER:-user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - postgres
+    profiles: ["pgvector"]   # start with: docker-compose --profile pgvector up
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: pv_grafana
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

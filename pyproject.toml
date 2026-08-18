@@ -1,0 +1,19 @@
+[project]
+name = "pv-assistant"
+version = "0.1.0"
+description = "Pharmacovigilance Signal & Label-Gap Intelligence Assistant (LLM Zoomcamp capstone)"
+requires-python = ">=3.12"
+dependencies = [
+    "chainlit>=1.3,<2",
+    "pydantic<2.10",
+    "openai>=1.40,<2",
+    "pandas>=2.2,<3",
+    "scikit-learn>=1.5,<2",
+    "psycopg2-binary>=2.9,<3",
+    "python-dotenv>=1.0,<2",
+    "requests>=2.32,<3",
+    "dlt[postgres]>=1.3,<2",
+]
+
+[dependency-groups]
+dev = ["jupyter", "tqdm", "pytest"]

@@ -1,0 +1,17 @@
+apiVersion: 1
+
+datasources:
+  - name: PostgreSQL
+    type: postgres
+    uid: pv-postgres
+    access: proxy
+    url: postgres:5432
+    database: pv_assistant
+    user: user
+    secureJsonData:
+      password: password
+    jsonData:
+      database: pv_assistant
+      sslmode: disable
+      postgresVersion: 1600
+    isDefault: true

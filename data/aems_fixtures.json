@@ -1,0 +1,92 @@
+{
+  "montelukast|suicidal ideation": {
+    "reports": 2181,
+    "serious": 1918,
+    "trend_12m": "elevated",
+    "as_of": "2019-06-01"
+  },
+  "montelukast|nightmare": {
+    "reports": 1466,
+    "serious": 402,
+    "trend_12m": "stable",
+    "as_of": "2019-06-01"
+  },
+  "ciprofloxacin|aortic aneurysm": {
+    "reports": 214,
+    "serious": 214,
+    "trend_12m": "rising",
+    "as_of": "2018-06-01"
+  },
+  "ciprofloxacin|tendon rupture": {
+    "reports": 3610,
+    "serious": 3115,
+    "trend_12m": "stable",
+    "as_of": "2018-06-01"
+  },
+  "canagliflozin|fournier's gangrene": {
+    "reports": 55,
+    "serious": 55,
+    "trend_12m": "rising",
+    "as_of": "2018-05-01"
+  },
+  "canagliflozin|diabetic ketoacidosis": {
+    "reports": 1892,
+    "serious": 1852,
+    "trend_12m": "stable",
+    "as_of": "2018-05-01"
+  },
+  "febuxostat|cardiovascular death": {
+    "reports": 411,
+    "serious": 411,
+    "trend_12m": "elevated",
+    "as_of": "2018-09-01"
+  },
+  "gabapentin|respiratory depression": {
+    "reports": 641,
+    "serious": 598,
+    "trend_12m": "rising",
+    "as_of": "2019-08-01"
+  },
+  "warfarin|gastrointestinal haemorrhage": {
+    "reports": 9120,
+    "serious": 8804,
+    "trend_12m": "stable",
+    "as_of": "2024-01-01"
+  },
+  "sertraline|serotonin syndrome": {
+    "reports": 1210,
+    "serious": 1105,
+    "trend_12m": "stable",
+    "as_of": "2024-01-01"
+  },
+  "lisinopril|angioedema": {
+    "reports": 4820,
+    "serious": 4310,
+    "trend_12m": "stable",
+    "as_of": "2024-01-01"
+  },
+  "atorvastatin|rhabdomyolysis": {
+    "reports": 3105,
+    "serious": 3020,
+    "trend_12m": "stable",
+    "as_of": "2024-01-01"
+  },
+  "metformin|lactic acidosis": {
+    "reports": 2960,
+    "serious": 2915,
+    "trend_12m": "stable",
+    "as_of": "2024-01-01"
+  },
+  "empagliflozin|fournier's gangrene": {
+    "reports": 31,
+    "serious": 31,
+    "trend_12m": "stable",
+    "as_of": "2024-01-01"
+  },
+  "tofacitinib|pulmonary embolism": {
+    "reports": 512,
+    "serious": 505,
+    "trend_12m": "elevated",
+    "as_of": "2024-01-01"
+  }
+}

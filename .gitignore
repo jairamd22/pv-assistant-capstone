@@ -1,0 +1,16 @@
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+.chainlit/
+.dlt/secrets.toml
+.env
+.venv/
+__pycache__/
+*.pyc
+.chainlit/
+.ipynb_checkpoints/
+.DS_Store
+interview-prep.html
+DEMO.md

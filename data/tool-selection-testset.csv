@@ -1,0 +1,16 @@
+question,expected_tools
+What does 21 CFR 314.80 require for 15-day alert reports?,search_regulations
+Under what regulation can a sponsor strengthen a warning without waiting for FDA approval?,search_regulations
+What is the timeline after FDA notifies a holder of new safety information under 505(o)(4)?,search_regulations
+Does the current ciprofloxacin label mention aortic aneurysm?,search_labels
+What's in the boxed warning for febuxostat?,search_labels
+Which label section of montelukast covers neuropsychiatric events?,search_labels
+How many adverse event reports are there for gabapentin and respiratory depression?,query_aems
+Is there a rising trend of Fournier's gangrene reports for canagliflozin?,query_aems
+We're seeing reports of respiratory depression with gabapentin — is that already reflected in the label?,query_aems;search_labels
+Reports of aortic dissection with ciprofloxacin are coming in — does the label cover this and what are we required to do?,query_aems;search_labels;search_regulations
+Has FDA historically required label changes for suicidal ideation with montelukast?,lookup_srlc_history
+Have SGLT2 inhibitors had safety labeling changes for perineal infections before?,lookup_srlc_history
+"Fournier's gangrene reports for empagliflozin — is the label already covering it, and did FDA act on this for the class before?",query_aems;search_labels;lookup_srlc_history
+"If we find a genuine label gap, which supplement type lets us warn immediately?",search_regulations
+Compare montelukast suicidal ideation report volume with what its label said in 2019.,query_aems;search_labels

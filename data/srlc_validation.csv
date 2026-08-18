@@ -1,0 +1,7 @@
+drug,reaction,meddra_term,change_date,change_type,label_section,source
+montelukast,suicidal ideation and behavior,Suicidal ideation,2020-03-04,Boxed Warning added,Boxed Warning,"FDA Drug Safety Communication, March 2020"
+ciprofloxacin,aortic aneurysm and dissection,Aortic aneurysm,2018-12-20,Warnings and Precautions strengthened,Warnings and Precautions,"FDA Drug Safety Communication, December 2018"
+ciprofloxacin,severe hypoglycemia including hypoglycemic coma,Hypoglycaemic coma,2018-07-10,Warnings strengthened,Warnings and Precautions,"FDA Drug Safety Communication, July 2018"
+canagliflozin,necrotizing fasciitis of the perineum (Fournier's gangrene),Fournier's gangrene,2018-08-29,Warnings and Precautions added,Warnings and Precautions,"FDA Drug Safety Communication, August 2018"
+febuxostat,cardiovascular death,Sudden cardiac death,2019-02-21,Boxed Warning added,Boxed Warning,"FDA Drug Safety Communication, February 2019"
+gabapentin,serious respiratory depression,Respiratory depression,2019-12-19,Warnings added,Warnings and Precautions,"FDA Drug Safety Communication, December 2019"

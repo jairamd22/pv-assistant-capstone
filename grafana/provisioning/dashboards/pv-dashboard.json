@@ -1,0 +1,353 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Last 5 Conversations",
+      "type": "table",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 8
+      },
+      "datasource": {
+        "type": "postgres",
+        "uid": "pv-postgres"
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT timestamp AS time, question, verdict, relevance, tools_used, model_used FROM conversations ORDER BY timestamp DESC LIMIT 5",
+          "refId": "A",
+          "datasource": {
+            "type": "postgres",
+            "uid": "pv-postgres"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {}
+    },
+    {
+      "id": 2,
+      "title": "Feedback (+1 / -1)",
+      "type": "piechart",
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 6,
+        "h": 8
+      },
+      "datasource": {
+        "type": "postgres",
+        "uid": "pv-postgres"
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT CASE WHEN feedback > 0 THEN 'Thumbs Up' ELSE 'Thumbs Down' END AS feedback_type, COUNT(*) AS count FROM feedback GROUP BY feedback_type",
+          "refId": "A",
+          "datasource": {
+            "type": "postgres",
+            "uid": "pv-postgres"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {}
+    },
+    {
+      "id": 3,
+      "title": "Relevancy",
+      "type": "gauge",
+      "gridPos": {
+        "x": 6,
+        "y": 8,
+        "w": 6,
+        "h": 8
+      },
+      "datasource": {
+        "type": "postgres",
+        "uid": "pv-postgres"
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT 100.0 * SUM(CASE WHEN relevance = 'RELEVANT' THEN 1 ELSE 0 END) / COUNT(*) AS relevant_pct FROM conversations",
+          "refId": "A",
+          "datasource": {
+            "type": "postgres",
+            "uid": "pv-postgres"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 60
+              },
+              {
+                "color": "green",
+                "value": 85
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {}
+    },
+    {
+      "id": 4,
+      "title": "Tool Call Distribution",
+      "type": "barchart",
+      "gridPos": {
+        "x": 12,
+        "y": 8,
+        "w": 6,
+        "h": 8
+      },
+      "datasource": {
+        "type": "postgres",
+        "uid": "pv-postgres"
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT tool_name, COUNT(*) AS calls FROM tool_calls GROUP BY tool_name ORDER BY calls DESC",
+          "refId": "A",
+          "datasource": {
+            "type": "postgres",
+            "uid": "pv-postgres"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {}
+    },
+    {
+      "id": 5,
+      "title": "Historical SrLC Match Rate",
+      "type": "gauge",
+      "gridPos": {
+        "x": 18,
+        "y": 8,
+        "w": 6,
+        "h": 8
+      },
+      "datasource": {
+        "type": "postgres",
+        "uid": "pv-postgres"
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT 100.0 * SUM(CASE WHEN flagged THEN 1 ELSE 0 END) / COUNT(*) AS match_pct FROM srlc_validation",
+          "refId": "A",
+          "datasource": {
+            "type": "postgres",
+            "uid": "pv-postgres"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 60
+              },
+              {
+                "color": "green",
+                "value": 85
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {}
+    },
+    {
+      "id": 6,
+      "title": "OpenAI Cost",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 16,
+        "w": 6,
+        "h": 8
+      },
+      "datasource": {
+        "type": "postgres",
+        "uid": "pv-postgres"
+      },
+      "targets": [
+        {
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT timestamp AS time, openai_cost AS cost FROM conversations WHERE openai_cost > 0 ORDER BY timestamp",
+          "refId": "A",
+          "datasource": {
+            "type": "postgres",
+            "uid": "pv-postgres"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {}
+    },
+    {
+      "id": 7,
+      "title": "Tokens Used",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 6,
+        "y": 16,
+        "w": 6,
+        "h": 8
+      },
+      "datasource": {
+        "type": "postgres",
+        "uid": "pv-postgres"
+      },
+      "targets": [
+        {
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT timestamp AS time, total_tokens FROM conversations ORDER BY timestamp",
+          "refId": "A",
+          "datasource": {
+            "type": "postgres",
+            "uid": "pv-postgres"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {}
+    },
+    {
+      "id": 8,
+      "title": "Response Time (s)",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 16,
+        "w": 6,
+        "h": 8
+      },
+      "datasource": {
+        "type": "postgres",
+        "uid": "pv-postgres"
+      },
+      "targets": [
+        {
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT timestamp AS time, response_time FROM conversations ORDER BY timestamp",
+          "refId": "A",
+          "datasource": {
+            "type": "postgres",
+            "uid": "pv-postgres"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {}
+    },
+    {
+      "id": 9,
+      "title": "Model Used",
+      "type": "barchart",
+      "gridPos": {
+        "x": 18,
+        "y": 16,
+        "w": 6,
+        "h": 8
+      },
+      "datasource": {
+        "type": "postgres",
+        "uid": "pv-postgres"
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT model_used, COUNT(*) AS count FROM conversations GROUP BY model_used",
+          "refId": "A",
+          "datasource": {
+            "type": "postgres",
+            "uid": "pv-postgres"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {}
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "tags": [
+    "pv-assistant"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "title": "PV Assistant Monitoring",
+  "uid": "pv-monitoring",
+  "version": 1
+}
