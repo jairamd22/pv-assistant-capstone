@@ -219,6 +219,9 @@ series) plus:
 - **Historical SrLC match rate** — how often flagged gaps align with the
   historical validation set
 
+![Grafana dashboard — top panels](screenshots/grafana-dashboard-top.png)
+![Grafana dashboard — bottom panels](screenshots/grafana-dashboard-bottom.png)
+
 ## Running it
 
 ```bash
@@ -233,6 +236,9 @@ Open **http://localhost:8000** (Chainlit) and ask:
 
 > *We're seeing reports of respiratory depression with gabapentin — is that
 > already reflected in the label?*
+
+![Chainlit UI — pharmacovigilance assistant](screenshots/Chain-lit-mainscreen.png)
+![Sample query and grounded answer](screenshots/Sample_query_1.png)
 
 Grafana: **http://localhost:3000** (admin/admin) → "PV Assistant Monitoring".
 
